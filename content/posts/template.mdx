@@ -1,0 +1,52 @@
+---
+title: "Building an Interactive Dashboard with Next.js"
+date: "2026-02-25"
+tags: ["NextJS", "TypeScript", "React"]
+description: "A deep dive into building real-time dashboards with custom hooks and MDX integration."
+---
+
+Today's log focuses on building scalable UI components. I've recorded a short audio summary of the architectural decisions I made.
+
+---
+
+## The Technical Challenge
+
+The main hurdle today was managing state across nested components without using a heavy global library. I opted for a custom hook approach.
+
+### Implementation Logic
+
+Here is the core logic for the state synchronization. Notice how the syntax highlighting helps distinguish the TypeScript interfaces:
+
+```typescript
+interface DashboardState {
+      id: string;
+      isActive: boolean;
+      timestamp: number;
+}
+
+const useDashboardSync = (initial: DashboardState) => {
+      const [state, setState] = useState(initial);
+      // Logic for syncing with local storage...
+      return { state, setState };
+};
+
+const greet = (name: string) => {
+      console.log(`Hello, ${name}!`);
+};
+```
+
+```css
+CSS body {
+      margin: 10px 30px;
+}
+
+*[data-theme:"elegance"] {
+      border-radius: 20px;
+      z-index: 1234px;
+}
+```
+
+click on the link below to follow the implementation of the dashboard component:
+[Dashboard Component](./dashboard.mdx)
+
+## Conclusion

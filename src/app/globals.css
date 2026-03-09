@@ -1,26 +1,264 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*! CSS Used fontfaces */
+@font-face {
+      font-family: "Space Grotesk";
+      src: url(/SpaceGrotesk-VariableFont_wght.ttf) format("ttf");
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+      font-family: "Intel One Mono";
+      src: url(/IntelOneMono-VariableFont_wght.ttf) format("ttf");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+      font-family: "Google Sans Code";
+      src: url(/GoogleSansCode-VariableFont_wght.ttf) format("ttf");
+}
+
+* {
+      box-sizing: border-box;
+      min-width: 0;
+}
+
+html {
+      --surface: light-dark(#f9f9fb, #09090b);
+      --text-primary: light-dark(#18181b, #e4e4e7);
+      --on-surface: light-dark(#002549, #fff);
+      --accent: light-dark(#002549, #ffd000);
+      --on-accent: light-dark(#cecdcd, #f0c400);
+      --accent-surface: light-dark(#736e6e, #e2ba03);
+      --neutral: light-dark(#71717a, #a1a1aa);
+      --app-bar-height: 104px;
+      --heading-font-family: "Space Grotesk", sans-serif;
+      --text-font-family: "Intel One Mono", monospace;
+      --code-font-family: "Google Sans Code", monospace;
+}
+
+html * {
+      scroll-margin-top: var(--app-bar-height);
+}
+
+/* Ensure the code blocks have rounded corners and proper padding */
+[data-rehype-pretty-code-figure] pre {
+      @apply rounded-lg p-4 overflow-x-auto border border-white/10;
+      background-color: #272822 !important; /* Forces Monokai background */
+}
+
+[data-rehype-pretty-code-figure] code {
+      @apply font-mono text-sm leading-relaxed;
+      display: grid; /* Allows for line highlighting later */
+}
+
+/* Optional: style for inline code like `const x = 1` */
+:not(pre) > code {
+      @apply bg-neutral-200 dark:bg-neutral-800 px-1.5 py-0.5 rounded text-pink-500;
+}
+
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+      background-color: transparent !important;
+      margin: 0 !important;
+      padding: 15px !important;
+}
+
+/* Optional: Add a subtle glow to the code block on hover */
+[data-rehype-pretty-code-figure]:hover {
+      border-color: var(--accent);
+      transition: border-color 0.3s ease;
+}
+
+@theme {
+      /* This forces the body text to ALWAYS use your variable */
+      /* No more guessing which grey Tailwind is picking! */
+      --color-prose-body: var(--text-primary);
+      --color-prose-headings: var(--text-primary);
+      --color-prose-bold: var(--text-primary);
+      --font-display: var(--heading-font-family), sans-serif;
+      --font-body: var(--text-font-family), sans-serif;
+      --font-mono: var(--code-font-family), monospace;
+
+      /* Link these to your accent for a "branded" feel */
+      --color-prose-bullets: var(--accent);
+      --color-prose-links: var(--accent);
+}
+
+/* Add this to ensure the "invert" logic doesn't mess with your variables */
+@layer base {
+      .prose {
+            color: var(--text-primary) !important;
+      }
+      .prose :is(h1, h2, h3, h4, h5, h6, strong) {
+            color: var(--text-primary) !important;
+      }
+}
+
+@layer base {
+      .prose {
+            /* Senior Trick: Slightly increase line height for better flow */
+            line-height: 1.8;
+            font-family: var(--font-primary);
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+      }
+
+      .prose :is(h1, h2, h3) {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            /* Tighter tracking for display fonts makes them look "premium" */
+            letter-spacing: -0.03em;
+      }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+      background: var(--surface);
+      font-family: var(--heading-font-family);
+      color: var(--text-primary);
+}
+
+.sun-and-moon {
+      position: relative;
+      cursor: pointer;
+
+      & > :is(.moon, .sun, .sun-beams) {
+            transform-origin: center center;
+      }
+
+      & > :is(.moon, .sun) {
+            fill: var(--icon-fill);
+
+            .theme-toggle:is(:hover, :focus-visible) > & {
+                  fill: var(--accent);
+            }
+      }
+
+      & > .sun-beams {
+            stroke: var(--icon-fill);
+            stroke-width: 2px;
+
+            .theme-toggle:is(:hover, :focus-visible) & {
+                  stroke: var(--icon-fill-hover);
+            }
+      }
+
+      [data-theme="dark"] & {
+            & > .sun {
+                  transform: scale(1.75);
+            }
+
+            & > .sun-beams {
+                  opacity: 0;
+            }
+
+            & > .moon > circle {
+                  transform: translateX(-7px);
+
+                  @supports (cx: 1) {
+                        transform: translateX(0);
+                        cx: 17;
+                  }
+            }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+            & > .sun {
+                  --spring: linear(0, 0.14 4%, 0.94 17%, 1.15 24% 30%, 1.02 43%, 0.98 51%, 1 77%, 1);
+                  /* transition: transform 0.5s ease-out; */
+                  transition: transform 1s var(--spring);
+            }
+
+            & > .sun-beams {
+                  --spring: linear(0, 0.14 4%, 0.94 17%, 1.15 24% 30%, 1.02 43%, 0.98 51%, 1 77%, 1);
+                  transition: transform 1s var(--spring);
+                  /* transition: transform 0.5s ease, opacity 0.5s ease; */
+            }
+
+            & .moon > circle {
+                  /* transition: transform 0.25s ease-in-out; */
+                  --spring: linear(0, 0.14 4%, 0.94 17%, 1.15 24% 30%, 1.02 43%, 0.98 51%, 1 77%, 1);
+                  transition: transform 1s var(--spring);
+
+                  @supports (cx: 1) {
+                        /* transition: cx 0.25s ease-in-out; */
+                        --spring: linear(0, 0.14 4%, 0.94 17%, 1.15 24% 30%, 1.02 43%, 0.98 51%, 1 77%, 1);
+                        transition: transform 1s var(--spring);
+                  }
+            }
+
+            [data-theme="dark"] & {
+                  & > .sun {
+                        transform: scale(1.75);
+                        transition-timing-function: ease;
+                        transition-duration: 0.25s;
+                  }
+
+                  & > .sun-beams {
+                        transform: rotateZ(-25deg);
+                        transition-duration: 0.15s;
+                  }
+
+                  & > .moon > circle {
+                        transition-delay: 0.25s;
+                        transition-duration: 0.5s;
+                  }
+            }
+      }
+
+      &::before {
+            --vibrance: 50%;
+            content: " ";
+            position: absolute;
+            /* inset: 10px 10px -10px; */
+            background: linear-gradient(to right in oklch longer hue, oklch(95% var(--vibrance) 0) 0 100%);
+            filter: blur(20px);
+            border-radius: inherit;
+            z-index: -1;
+      }
+}
+
+.theme-toggle {
+      --icon-fill: var(--accent);
+      --icon-fill-hover: var(--neutral);
+}
+
+[data-theme="light"] {
+      color-scheme: light;
+}
+
+[data-theme="dark"] {
+      color-scheme: dark;
+}
+
+[data-theme="dark"],
+.dark {
+      --surface: #09090b;
+      --text-primary: #e4e4e7;
+      --accent: #ffd000; /* Your Gold for dark mode */
+}
+
+svg {
+      & > .primary,
+      & > .secondary {
+            fill: var(--icon-fill);
+      }
+}
+
+.reveal {
+      width: 100%;
+      height: 50rem;
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 80%;
+}
+
+@keyframes reveal {
+      from {
+            opacity: 0;
+            clip-path: inset(45% 20% 45% 20%);
+      }
+
+      to {
+            opacity: 1;
+            clip-path: inset(0% 0% 0% 0%);
+      }
 }
