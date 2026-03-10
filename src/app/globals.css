@@ -25,15 +25,26 @@
 html {
       --surface: light-dark(#f9f9fb, #09090b);
       --text-primary: light-dark(#18181b, #e4e4e7);
+      --reversed-text: light-dark(#e4e4e7, #09090b);
       --on-surface: light-dark(#002549, #fff);
       --accent: light-dark(#002549, #ffd000);
-      --on-accent: light-dark(#cecdcd, #f0c400);
-      --accent-surface: light-dark(#736e6e, #e2ba03);
+      --on-accent: light-dark(#18181b, #f0c400);
+      --accent-surface: light-dark(#a1a1aa, #ffd000);
       --neutral: light-dark(#71717a, #a1a1aa);
       --app-bar-height: 104px;
       --heading-font-family: "Space Grotesk", sans-serif;
       --text-font-family: "Intel One Mono", monospace;
       --code-font-family: "Google Sans Code", monospace;
+      --shadow-color: 220 3% 15%;
+      --shadow-strength: 1%;
+      --inner-shadow-highlight: inset 0 -0.5px 0 0 #fff, inset 0 0.5px 0 0 rgba(0, 0, 0, 0.067);
+      --card-shadow:
+            0 -1px 2px 0 hsl(var(--shadow-color) / calc(var(--shadow-strength) + 2%)),
+            0 2px 1px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+            0 5px 5px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 3%)),
+            0 10px 10px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 4%)),
+            0 20px 20px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 5%)),
+            0 40px 40px -2px hsl(var(--shadow-color) / calc(var(--shadow-strength) + 7%));
 }
 
 html * {

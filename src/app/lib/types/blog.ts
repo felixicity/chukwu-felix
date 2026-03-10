@@ -5,6 +5,7 @@ export interface PostMeta {
       tags: string[];
       readingTime: string;
       description?: string; // Optional: for SEO
+      issue?: string;
 }
 
 export interface Post {

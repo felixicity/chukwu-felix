@@ -2,22 +2,23 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Post } from "../lib/types/blog";
 
-const RecentArticles = ({ posts }) => {
+const RecentArticles = ({ posts }: { posts: Post[] }) => {
       return (
-            <div className="divide-y divide-white/5">
+            <div className="flex flex-col gap-4  divide-y divide-white/5">
                   {posts.map((post, i) => (
-                        <div key={i} className="relative group">
+                        <div key={i} className="relative group overflow-hidden shadow-sm rounded-xl">
                               {/* The Hover Background */}
                               <motion.div
                                     layoutId="hoverBg"
-                                    className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 rounded-xl -z-10"
+                                    className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 shadow-[var(--card-shadow)] rounded-xl -z-10"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                               />
                               <Link
                                     key={post.slug}
                                     href={`/blog/${post.slug}`}
-                                    className="group grid md:grid-cols-[120px_1fr_auto] items-center py-8 hover:bg-white/[0.02] transition-colors px-4 -mx-4 rounded-xl"
+                                    className="grid md:grid-cols-[120px_1fr_auto] items-center px-12 py-8 hover:bg-white/[0.02] transition-colors -mx-4 rounded-xl"
                               >
                                     {/* Date: Subtle & Mono */}
                                     <time className="text-xs font-mono text-[var(--neutral)] uppercase tracking-widest">
@@ -29,10 +30,14 @@ const RecentArticles = ({ posts }) => {
                                           <h3 className="text-xl font-semibold group-hover:text-[var(--accent)] transition-colors">
                                                 {post.meta.title}
                                           </h3>
-                                          <p className="text-[var(--neutral)] text-sm line-clamp-1 max-w-2xl">
-                                                {post.content}
+                                          <p className="text-[var(--neutral)] text-sm line-clamp-3 max-w-2xl">
+                                                {post.meta.description}
                                           </p>
                                     </div>
+
+                                    <span className="absolute -top-3 -right-1 md:relative text-6xl text-[var(--accent-surface)]">
+                                          {post.meta.issue && `#${post.meta.issue}`}
+                                    </span>
 
                                     {/* Reading Time: The "Senior" Detail */}
                                     <div className="hidden md:block text-xs font-mono text-white/20 italic">

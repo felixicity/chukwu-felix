@@ -1,24 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getAllPosts } from "../lib/mdx";
-// import PostCard from "../components/postCard";
-//  {posts.map((post) => (
-//                         <PostCard
-//                               key={post.slug}
-//                               title={post.meta.title}
-//                               tags={post.meta.tags}
-//                               date={post.meta.date}
-//                               slug={post.slug}
-//                               readingTime={post.meta.readingTime}
-//                         />
-//                   ))}
 
 const Blogpage = async () => {
       const posts = await getAllPosts();
       const allTags = ["NextJS", "TypeScript", "React", "Css", "UI/UX", "AI"];
 
       return (
-            <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section className="">
                   <main className="max-w-7xl mx-auto px-6 py-20">
                         <header className="mb-16">
                               <h1 className="text-5xl font-display font-bold mb-4">Daily Logs</h1>
@@ -90,7 +79,7 @@ const Blogpage = async () => {
                                           {posts.map((post) => (
                                                 <article
                                                       key={post.slug}
-                                                      className="group relative grid md:grid-cols-[1fr_2fr] gap-8"
+                                                      className="relative flex flex-col-reverse max-w-xl m-auto shadow-[var(--card-shadow)] rounded-xl gap-8"
                                                 >
                                                       {/* Visual Thumbnail (Optional but helpful) */}
                                                       <div className="aspect-[16/10] bg-white/5 rounded-xl border border-white/10 overflow-hidden relative">
@@ -103,7 +92,7 @@ const Blogpage = async () => {
                                                       </div>
 
                                                       {/* Content */}
-                                                      <div className="flex flex-col justify-center">
+                                                      <div className="flex flex-col justify-center px-4 pt-4">
                                                             <div className="flex items-center gap-3 mb-3">
                                                                   <time className="text-xs font-mono text-[var(--accent)]">
                                                                         {post.meta.date}
@@ -113,6 +102,24 @@ const Blogpage = async () => {
                                                                         {post.meta.readingTime}
                                                                   </span>
                                                             </div>
+                                                            <div className="flex gap-4 mb-4">
+                                                                  {post.meta.tags.length > 0 &&
+                                                                        post.meta.tags.map((tag) => (
+                                                                              <span
+                                                                                    key={tag}
+                                                                                    className="text-xs font-mono text-[var(--accent)] uppercase"
+                                                                              >
+                                                                                    #{tag}
+                                                                              </span>
+                                                                        ))}
+                                                            </div>
+                                                            {post.meta.issue && (
+                                                                  <div className="border border-[var(--neutral)] rounded-4xl px-3 py-1 inline-flex items-center gap-2 mb-2 max-w-[80px]">
+                                                                        <span className="text-xs font-mono text-[var(--accent)] uppercase">
+                                                                              Ep #{post.meta.issue}
+                                                                        </span>
+                                                                  </div>
+                                                            )}
                                                             <h2 className="text-2xl font-bold group-hover:text-[var(--accent)] transition-colors mb-4">
                                                                   <Link href={`/blog/${post.slug}`}>
                                                                         {post.meta.title}

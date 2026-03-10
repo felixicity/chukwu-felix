@@ -2,22 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
 
-const project = {
-      title: "Kazafi",
-      img: "/Screenshot_Kazafi.png",
-      description:
-            "Engineered a custom Next.js platform that unifies Paystack's secure payment orchestration with a bespoke Node.js analytics dashboard, giving stakeholders full visibility into revenue data.",
-      tech: ["next.js", "typescript", "node.js"],
-      challengeText:
-            "Standard e-commerce templates lacked the performance and custom CMS flexibility needed to scale with complex inventory and localized payment flows.",
-      solutionText:
-            "Engineered a custom Next.js platform that unifies Paystack's secure payment orchestration with a bespoke Node.js analytics dashboard, giving stakeholders full visibility into revenue data.",
-      tagline: "e-commerce, payments, automation",
-      live: "https://kazafi-commerce.vercel.app/",
-      repo: "https://github.com/felixicity/kazafi",
-};
-
-export default function SingleProject() {
+export default function SingleProject({ project }) {
       return (
             <main className="max-w-7xl mx-auto px-6 py-20">
                   {/* 1. HERO SECTION */}
@@ -113,7 +98,7 @@ export default function SingleProject() {
                                                 </a>
                                                 <a
                                                       href={project.repo}
-                                                      className="flex items-center justify-between group text-sm hover:text-[var(--accent)]"
+                                                      className="flex items-center justify-between group text-sm hover:text-green-700"
                                                 >
                                                       Source Code{" "}
                                                       <Github

@@ -3,29 +3,29 @@ import { MDXRemote } from "next-mdx-remote/rsc"; // The renderer
 import { Badge } from "../../components/Badge";
 import rehypePrettyCode from "rehype-pretty-code";
 import { CodeBlock } from "../../components/codeBlock";
+import AudioPlayer from "@/app/components/AudioPlayer";
+import Youtube from "@/app/components/Youtube";
 
 const mdxComponents = {
-      // We map 'pre' to our custom CodeBlock
-      pre: (props: any) => <CodeBlock {...props} />,
+      AudioPlayer,
+      Youtube,
+      pre: (props: { children: React.ReactNode; [key: string]: unknown }) => <CodeBlock {...props} />,
+};
+
+const prettyCodeOptions = {
+      theme: "monokai", // <--- Your requested theme
+      keepBackground: true,
+      onVisitLine(node: { children: { type: string; value: string }[] }) {
+            // Prevent lines from collapsing in display: grid
+            if (node.children.length === 0) {
+                  node.children = [{ type: "text", value: " " }];
+            }
+      },
 };
 
 const options = {
       mdxOptions: {
-            rehypePlugins: [
-                  [
-                        rehypePrettyCode,
-                        {
-                              theme: "monokai", // <--- Your requested theme
-                              keepBackground: true,
-                              onVisitLine(node: any) {
-                                    // Prevent lines from collapsing in display: grid
-                                    if (node.children.length === 0) {
-                                          node.children = [{ type: "text", value: " " }];
-                                    }
-                              },
-                        },
-                  ],
-            ],
+            rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
       },
 };
 

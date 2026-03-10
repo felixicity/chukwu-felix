@@ -3,7 +3,7 @@ interface AudioProps {
       title?: string;
 }
 
-export const AudioPlayer = ({ src, title }: AudioProps) => {
+const AudioPlayer = ({ src, title }: AudioProps) => {
       return (
             <div className="my-6 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
                   {title && (
@@ -16,3 +16,5 @@ export const AudioPlayer = ({ src, title }: AudioProps) => {
             </div>
       );
 };
+
+export default AudioPlayer;

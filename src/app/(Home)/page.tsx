@@ -37,35 +37,39 @@ export default async function Homepage() {
                               <Image src="/image.png" width={5000} height={5000} alt="felix" className="w-full" />
                         </div>
                         <div>
-                              <h2 className="inline-block font-bold uppercase font-mono text-lg lg:text-2xl dark:bg-yellow-400 p-2 dark:text-black text-white bg-black">
+                              <h2 className="inline-block font-bold uppercase font-mono text-lg lg:text-2xl bg-[var(--on-accent)] text-[var(--reversed-text)] tracking-wide">
                                     About me
                               </h2>
                               <p className="py-2 text-[var(--accent)]">
                                     I&apos;m a Software Engineer based in Lagos, Nigeria.
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
-                                    I&apos;ve spent the last 5+ years building clean, functional applications for web
-                                    and, more recently, mobile. I focus on creating products that drive business value
-                                    while being a joy to use. My work has spanned Healthcare, Financial Services,
-                                    Identity Management, and AgriTech.
+                                    I&apos;m a Full-stack Engineer with a passion for building robust, scalable
+                                    applications that solve real-world problems. For the past [Number] years, I&apos;ve
+                                    specialized in the Node.js ecosystem, moving beyond just writing code to designing
+                                    architectures that stand the test of time.
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
-                                    I&apos;m driven by curiosity and a genuine love for learning. Whether it&apos;s
-                                    solving a tricky UI challenge, or exploring a new framework, I&apos;m always excited
-                                    to dive in. What matters most to me is crafting applications that are both
-                                    delightful to use and rock-solid in functionality.
+                                    My philosophy is simple: Code is for humans, not just machines. Whether I&apos;m
+                                    optimizing a PostgreSQL query, fine-tuning a Next.js frontend, or documenting my
+                                    journey, I focus on clarity, performance, and maintainability.
                               </p>
+                              <div className="mt-4">
+                                    <p className="py-2 text-[var(--accent)]">When I'm not in the IDE:</p>
+                                    <p className="pb-2 text-sm text-balance leading-6">
+                                          I&apos;m likely diving into the latest tech stacks, sharing my journey through
+                                          my 'Daily Logs,' or listening to some classic reggae to clear my head. I
+                                          believe that being a great engineer means being a lifelong student, and I
+                                          bring that curiosity to every project I touch.
+                                    </p>
+                              </div>
                         </div>
                   </main>
-                  {/* <div className="px-8 py-8 lg:px-20"> */}
-                  {/* Example structure for the Featured Section */}
+
                   <section className="space-y-12 py-20 px-8">
                         <h2 className="text-3xl lg:text-5xl font-bold px-12">Featured Work</h2>
                         <ProjectCarousel projects={projects} />
                   </section>
-                  {/* <span className="absolute -top-3 -right-1 text-6xl text-[var(--on-accent)]">
-                                          #09
-                                    </span> */}
 
                   <section className="py-24 border-t border-white/5 px-8 lg:px-20">
                         <div className="flex items-baseline justify-between mb-12">
@@ -80,7 +84,10 @@ export default async function Homepage() {
                                     className="group flex items-center gap-2 text-sm font-medium text-[var(--accent)]"
                               >
                                     View Archive{" "}
-                                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                    <ArrowRight
+                                          size={16}
+                                          className="hidden md:inline-block group-hover:translate-x-1 transition-transform"
+                                    />
                               </Link>
                         </div>
                         <RecentArticles posts={posts} />

@@ -34,7 +34,7 @@ export default function RootLayout({
             },
             {
                   title: "resume",
-                  url: "https//www.github.com/felixicity",
+                  url: "https://www.github.com/felixicity",
             },
             {
                   title: "github",
