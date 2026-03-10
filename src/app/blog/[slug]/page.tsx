@@ -4,8 +4,8 @@ import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types"; // T
 import { Badge } from "../../components/Badge";
 import rehypePrettyCode from "rehype-pretty-code";
 import { CodeBlock } from "../../components/codeBlock";
-import AudioPlayer from "@/app/components/AudioPlayer";
-import Youtube from "@/app/components/Youtube";
+import AudioPlayer from "../../components/AudioPlayer";
+import Youtube from "../../components/Youtube";
 
 const mdxComponents = {
       AudioPlayer,
