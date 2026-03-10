@@ -1,8 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
+import { Project } from "@/app/components/projectCard";
+import { useParams } from "next/navigation";
+import { projects } from "@/app/lib/projectData";
 
-export default function SingleProject({ project }) {
+export default function SingleProject() {
+      const projectName = useParams().id;
+
+      const project: Project | undefined = projects.find(
+            (p: Project) => p.title.toLowerCase().replace(/\s+/g, "-") === projectName,
+      );
+
+      const projectImage = project?.img ? project.img : "/placeholder.png";
+
       return (
             <main className="max-w-7xl mx-auto px-6 py-20">
                   {/* 1. HERO SECTION */}
@@ -12,10 +25,10 @@ export default function SingleProject({ project }) {
                                     Projects
                               </Link>
                               <span>/</span>
-                              <span>{project.title}</span>
+                              <span>{project?.title}</span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight">{project.title}</h1>
-                        <p className="text-xl text-[var(--neutral)] max-w-3xl leading-relaxed">{project.tagline}</p>
+                        <h1 className="text-5xl md:text-7xl font-display font-bold tracking-tight">{project?.title}</h1>
+                        {/* <p className="text-xl text-[var(--neutral)] max-w-3xl leading-relaxed">{project.tagline}</p> */}
                   </header>
 
                   {/* 2. THE MAIN GRID */}
@@ -25,7 +38,7 @@ export default function SingleProject({ project }) {
                               {/* Big Feature Image */}
                               <section className="rounded-2xl overflow-hidden border border-white/10 bg-[#121214] p-2">
                                     <Image
-                                          src={project.img}
+                                          src={projectImage}
                                           alt="Cover"
                                           width={1200}
                                           height={675}
@@ -36,7 +49,7 @@ export default function SingleProject({ project }) {
                               {/* The Content (Use your themed Prose class here) */}
                               <article className="prose max-w-none">
                                     <h2>The Challenge</h2>
-                                    <p>{project.challengeText}</p>
+                                    <p>{project?.challengeText}</p>
 
                                     <div className="grid md:grid-cols-2 gap-8 my-12">
                                           <div className="p-6 rounded-xl bg-white/5 border border-white/10">
@@ -54,7 +67,7 @@ export default function SingleProject({ project }) {
                                     </div>
 
                                     <h2>The Solution</h2>
-                                    <p>{project.solutionText}</p>
+                                    <p>{project?.solutionText}</p>
 
                                     {/* Code Snippet Example */}
                                     <pre className="not-prose">{/* Your Custom CodeBlock component goes here */}</pre>
@@ -63,21 +76,21 @@ export default function SingleProject({ project }) {
 
                         {/* RIGHT COLUMN: The Sticky Specs */}
                         <aside className="space-y-8">
-                              <div className="sticky top-24 p-8 rounded-2xl border border-white/10 bg-[#09090b] space-y-8">
+                              <div className="sticky top-24 p-8 rounded-2xl border border-white/10 bg-[var(--reversed-text)] space-y-8">
                                     <div>
                                           <h4 className="text-xs uppercase tracking-widest text-[var(--neutral)] mb-4">
                                                 Tech Stack
                                           </h4>
                                           <div className="flex flex-wrap gap-2">
-                                                {project.tech.map((tech: string) => (
+                                                {project?.tech.map((tech: string) => (
                                                       <span
                                                             key={tech}
-                                                            className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-[var(--accent)]"
+                                                            className="px-3 py-1 rounded-full bg-white/5 border border-[var(--neutral)] text-xs font-mono text-[var(--accent)]"
                                                       >
                                                             {tech}
                                                       </span>
                                                 ))}
-                                                {/* {project.tech.map(t => <Badge key={t} text={t} />)} */}
+                                                {/* {project?.tech.map(t => <Badge key={t} text={t} />)} */}
                                           </div>
                                     </div>
 
@@ -87,7 +100,7 @@ export default function SingleProject({ project }) {
                                           </h4>
                                           <div className="flex flex-col gap-3">
                                                 <a
-                                                      href={project.live}
+                                                      href={project?.live}
                                                       className="flex items-center justify-between group text-sm hover:text-[var(--accent)]"
                                                 >
                                                       Live Demo{" "}
@@ -97,7 +110,7 @@ export default function SingleProject({ project }) {
                                                       />
                                                 </a>
                                                 <a
-                                                      href={project.repo}
+                                                      href={project?.repo}
                                                       className="flex items-center justify-between group text-sm hover:text-green-700"
                                                 >
                                                       Source Code{" "}

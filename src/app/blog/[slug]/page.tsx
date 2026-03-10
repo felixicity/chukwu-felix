@@ -1,5 +1,6 @@
 import { getPostBySlug } from "../../lib/mdx";
-import { MDXRemote } from "next-mdx-remote/rsc"; // The renderer
+import { MDXRemote } from "next-mdx-remote/rsc";
+import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types"; // The renderer
 import { Badge } from "../../components/Badge";
 import rehypePrettyCode from "rehype-pretty-code";
 import { CodeBlock } from "../../components/codeBlock";
@@ -23,7 +24,7 @@ const prettyCodeOptions = {
       },
 };
 
-const options = {
+const options: SerializeOptions = {
       mdxOptions: {
             rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
       },

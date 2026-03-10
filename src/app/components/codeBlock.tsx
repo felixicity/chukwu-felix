@@ -1,9 +1,16 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, ComponentPropsWithoutRef } from "react";
 import { Check, Copy } from "lucide-react";
 
-export const CodeBlock = ({ children, ...props }: { children: React.ReactNode; [key: string]: unknown }) => {
+// Define an interface that extends the standard 'pre' attributes
+interface CodeBlockProps extends ComponentPropsWithoutRef<"pre"> {
+      // rehype-pretty-code adds these custom data attributes
+      "data-language"?: string;
+      "data-theme"?: string;
+}
+
+export const CodeBlock = ({ children, ...props }: CodeBlockProps) => {
       const [isCopied, setIsCopied] = useState(false);
       const preRef = useRef<HTMLPreElement>(null);
 
@@ -11,9 +18,8 @@ export const CodeBlock = ({ children, ...props }: { children: React.ReactNode; [
       const language = props["data-language"] || "code";
 
       const copyToClipboard = async () => {
-            // Senior move: Get the text directly from the rendered DOM
             // to ensure we get exactly what the user sees, sans formatting objects.
-            const rawCode = preRef.current?.innerText || "";
+            const rawCode = preRef.current?.textContent || "";
 
             await navigator.clipboard.writeText(rawCode);
             setIsCopied(true);

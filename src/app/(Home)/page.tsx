@@ -41,26 +41,24 @@ export default async function Homepage() {
                                     About me
                               </h2>
                               <p className="py-2 text-[var(--accent)]">
-                                    I&apos;m a Software Engineer based in Lagos, Nigeria.
+                                    {"I'm a Software Engineer based in Lagos, Nigeria."}
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
-                                    I&apos;m a Full-stack Engineer with a passion for building robust, scalable
-                                    applications that solve real-world problems. For the past [Number] years, I&apos;ve
-                                    specialized in the Node.js ecosystem, moving beyond just writing code to designing
-                                    architectures that stand the test of time.
+                                    {
+                                          "I'm a Full-stack Engineer with a passion for building robust, scalable applications that solve real-world problems. For the past [Number] years, I've specialized in the Node.js ecosystem, moving beyond just writing code to designing architectures that stand the test of time."
+                                    }
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
-                                    My philosophy is simple: Code is for humans, not just machines. Whether I&apos;m
-                                    optimizing a PostgreSQL query, fine-tuning a Next.js frontend, or documenting my
-                                    journey, I focus on clarity, performance, and maintainability.
+                                    {
+                                          "My philosophy is simple: Code is for humans, not just machines. Whether I'm optimizing a PostgreSQL query, fine-tuning a Next.js frontend, or documenting my journey, I focus on clarity, performance, and maintainability."
+                                    }
                               </p>
                               <div className="mt-4">
-                                    <p className="py-2 text-[var(--accent)]">When I'm not in the IDE:</p>
+                                    <p className="py-2 text-[var(--accent)]">{"When I'm not in the IDE:"}</p>
                                     <p className="pb-2 text-sm text-balance leading-6">
-                                          I&apos;m likely diving into the latest tech stacks, sharing my journey through
-                                          my 'Daily Logs,' or listening to some classic reggae to clear my head. I
-                                          believe that being a great engineer means being a lifelong student, and I
-                                          bring that curiosity to every project I touch.
+                                          {
+                                                "I'm likely diving into the latest tech stacks, sharing my journey through my Daily Logs, or listening to some classic reggae to clear my head. I believe that being a great engineer means being a lifelong student, and Ibring that curiosity to every project I touch."
+                                          }
                                     </p>
                               </div>
                         </div>

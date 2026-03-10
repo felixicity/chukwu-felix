@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 
 export interface Project {
-      slug?: string;
       title: string;
       img: string;
       description: string;
@@ -18,7 +17,10 @@ export interface Project {
 }
 
 export const ProjectCard = ({ project }: { project: Project }) => (
-      <Link href={`/projects/${project.slug}`} className="group block rounded-xl shadow-[var(--card-shadow)]">
+      <Link
+            href={`/projects/${project.title.toLowerCase().replace(/\s+/g, "-")}`}
+            className="group block rounded-xl shadow-[var(--card-shadow)]"
+      >
             <div className="relative aspect-[16/10] rounded-t-xl overflow-hidden mb-4">
                   {/* Subtle Overlay on Hover */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
