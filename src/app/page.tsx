@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 import { getAllPosts } from "./lib/mdx";
 import "./globals.css";
 
-export const projects = [
+const projects = [
       {
             title: "Kazafi",
             img: "/Screenshot_Kazafi.png",
