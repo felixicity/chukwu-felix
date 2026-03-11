@@ -8,13 +8,9 @@ import { CodeBlock } from "../../components/CodeBlock";
 import AudioPlayer from "@/app/components/AudioPlayer";
 import Youtube from "@/app/components/Youtube";
 
-type Props = {
-      params: { slug: string };
-};
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-      // Fetch your article data (Next.js deduplicates this fetch)
-      const post = await getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+      const { slug } = await params;
+      const post = await getPostBySlug(slug);
 
       return {
             title: post.meta.title,
