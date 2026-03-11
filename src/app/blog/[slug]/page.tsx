@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import { getPostBySlug } from "../../lib/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types"; // The renderer
@@ -6,6 +7,44 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { CodeBlock } from "../../components/CodeBlock";
 import AudioPlayer from "@/app/components/AudioPlayer";
 import Youtube from "@/app/components/Youtube";
+
+type Props = {
+      params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+      // Fetch your article data (Next.js deduplicates this fetch)
+      const post = await getPostBySlug(params.slug);
+
+      return {
+            title: post.meta.title,
+            description: post.meta.description,
+            openGraph: {
+                  title: post.meta.title,
+                  description: post.meta.description,
+                  url: `https://chukwu-felix.vercel.app/blog/${post.slug}`,
+                  siteName: "Chukwu Felix - Software Engineer",
+                  images: [
+                        {
+                              url: post.meta.image || "", // Tailored image per post
+                              width: 1200,
+                              height: 630,
+                              alt: post.meta.title,
+                        },
+                  ],
+                  locale: "en_US",
+                  type: "article", // Crucial for blog posts
+                  publishedTime: post.meta.date,
+                  authors: ["Chukwu Felix"],
+            },
+            twitter: {
+                  card: "summary_large_image",
+                  title: post.meta.title,
+                  description: post.meta.description,
+                  images: [post.meta?.image || ""],
+            },
+      };
+}
 
 const mdxComponents = {
       AudioPlayer,

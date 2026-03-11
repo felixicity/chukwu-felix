@@ -41,7 +41,13 @@ export function ProjectCarousel({
                                           transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
                                           className="absolute inset-0"
                                     >
-                                          <Image src={project.img} alt={project.title} fill className="object-cover" />
+                                          <Image
+                                                src={project.img}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover"
+                                                priority
+                                          />
                                     </motion.div>
                               </AnimatePresence>
                         </div>

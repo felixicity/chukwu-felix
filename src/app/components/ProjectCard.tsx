@@ -34,6 +34,7 @@ export const ProjectCard = ({ project }: { project: Project }) => (
                         alt={project.title}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        priority
                   />
             </div>
 

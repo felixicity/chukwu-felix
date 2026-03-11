@@ -43,6 +43,7 @@ export default function SingleProject() {
                                           width={1200}
                                           height={675}
                                           className="rounded-xl"
+                                          priority
                                     />
                               </section>
 

@@ -1,23 +1,51 @@
+import { Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import Link from "next/link";
 import { Header } from "./components/Header";
 import type { Metadata } from "next";
 import "./globals.css";
 
+// app/layout.tsx
 export const metadata: Metadata = {
-      title: "Chukwu Felix - Software Engineer",
+      metadataBase: new URL("https://chukwu-felix.vercel.app/"), // Essential for relative image paths
+      title: {
+            template: "%s | ",
+            default: "Chukwu Felix - Software Engineer",
+      },
       icons: { icon: "/icon.png" },
-      description: "Reach out to me today and change the returns of your business",
+      description: "Portfolio and blog about software engineering.",
       keywords: ["Software engineer", "Full stack", "Web developer", "Portfolio"],
       creator: "Chukwu Felix",
       openGraph: {
             type: "website",
-            url: "https://example.com",
-            title: "Chukwu Felix - Software Engineer",
-            description: "My Website Description",
+            locale: "en_US",
+            url: "https://chukwu-felix.vercel.app/",
+            description: "Portfolio and blog about software engineering.",
             siteName: "Chukwu Felix - Software Engineer",
-            images: [{ url: "https://example.com/og.png" }],
+      },
+      twitter: {
+            card: "summary_large_image",
+            site: "@Felixchukwu2026",
       },
 };
+
+const spaceGrotesk = Space_Grotesk({
+      subsets: ["latin"],
+      variable: "--font-space",
+      display: "swap",
+});
+
+const googleSans = localFont({
+      src: "../../public/fonts/GoogleSansCode-VariableFont_wght.ttf",
+      variable: "--font-google-sans",
+      display: "swap",
+});
+
+const intelMono = localFont({
+      src: "../../public/fonts/IntelOneMono-VariableFont_wght.ttf",
+      variable: "--font-intel-mono",
+      display: "swap",
+});
 
 export default function RootLayout({
       children,
@@ -42,8 +70,8 @@ export default function RootLayout({
             },
       ];
       return (
-            <html lang="en">
-                  <body>
+            <html lang="en" className={`${spaceGrotesk.variable} ${googleSans.variable} ${intelMono.variable}`}>
+                  <body className="bg-[var(--surface)] text-[var(--text-primary)]">
                         <div className="min-h-screen w-full overflow-hidden">
                               <div className="flex flex-col gap-4 md:flex-row justify-between items-center px-8 lg:px-20 py-2">
                                     <div className="flex items-center">

@@ -88,6 +88,9 @@ const Blogpage = async () => {
                                                                   fill
                                                                   className="object-cover opacity-60 group-hover:opacity-100 transition-opacity"
                                                                   alt="fel"
+                                                                  width={1000}
+                                                                  height={1000}
+                                                                  priority
                                                             />
                                                       </div>
 

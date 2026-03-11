@@ -1,22 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/*! CSS Used fontfaces */
-@font-face {
-      font-family: "Space Grotesk";
-      src: url(/SpaceGrotesk-VariableFont_wght.ttf) format("ttf");
-}
-
-@font-face {
-      font-family: "Intel One Mono";
-      src: url(/IntelOneMono-VariableFont_wght.ttf) format("ttf");
-}
-
-@font-face {
-      font-family: "Google Sans Code";
-      src: url(/GoogleSansCode-VariableFont_wght.ttf) format("ttf");
-}
-
 * {
       box-sizing: border-box;
       min-width: 0;
@@ -32,9 +16,6 @@ html {
       --accent-surface: light-dark(#a1a1aa, #ffd000);
       --neutral: light-dark(#71717a, #a1a1aa);
       --app-bar-height: 104px;
-      --heading-font-family: "Space Grotesk", sans-serif;
-      --text-font-family: "Intel One Mono", monospace;
-      --code-font-family: "Google Sans Code", monospace;
       --shadow-color: 220 3% 15%;
       --shadow-strength: 1%;
       --inner-shadow-highlight: inset 0 -0.5px 0 0 #fff, inset 0 0.5px 0 0 rgba(0, 0, 0, 0.067);
@@ -58,8 +39,9 @@ html * {
 }
 
 [data-rehype-pretty-code-figure] code {
-      @apply font-mono text-sm leading-relaxed;
+      @apply text-sm leading-relaxed;
       display: grid; /* Allows for line highlighting later */
+      font-family: var(--font-google-sans);
 }
 
 /* Optional: style for inline code like `const x = 1` */
@@ -79,15 +61,19 @@ html * {
       transition: border-color 0.3s ease;
 }
 
+body {
+      font-family: var(--font-space);
+}
+
 @theme {
       /* This forces the body text to ALWAYS use your variable */
       /* No more guessing which grey Tailwind is picking! */
       --color-prose-body: var(--text-primary);
       --color-prose-headings: var(--text-primary);
       --color-prose-bold: var(--text-primary);
-      --font-display: var(--heading-font-family), sans-serif;
-      --font-body: var(--text-font-family), sans-serif;
-      --font-mono: var(--code-font-family), monospace;
+      --font-display: var(--font-space), sans-serif;
+      --font-body: var(--font-intel-mono), sans-serif;
+      --font-mono: var(--font-google-sans), monospace;
 
       /* Link these to your accent for a "branded" feel */
       --color-prose-bullets: var(--accent);
@@ -108,7 +94,7 @@ html * {
       .prose {
             /* Senior Trick: Slightly increase line height for better flow */
             line-height: 1.8;
-            font-family: var(--font-primary);
+            font-family: var(--font-space);
             font-weight: 400;
             -webkit-font-smoothing: antialiased;
       }
@@ -119,12 +105,6 @@ html * {
             /* Tighter tracking for display fonts makes them look "premium" */
             letter-spacing: -0.03em;
       }
-}
-
-body {
-      background: var(--surface);
-      font-family: var(--heading-font-family);
-      color: var(--text-primary);
 }
 
 .sun-and-moon {

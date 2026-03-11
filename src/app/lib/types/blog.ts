@@ -6,6 +6,7 @@ export interface PostMeta {
       readingTime: string;
       description?: string; // Optional: for SEO
       issue?: string;
+      image?: string | URL;
 }
 
 export interface Post {

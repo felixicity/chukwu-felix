@@ -35,7 +35,14 @@ export default async function App() {
                   </div>
                   <main className="flex flex-col md:flex-row gap-6 px-8 py-4 lg:gap-8  lg:px-20">
                         <div className="flex items-center max-w-lg">
-                              <Image src="/image.png" width={5000} height={5000} alt="felix" className="w-full" />
+                              <Image
+                                    src="/image.png"
+                                    width={1000}
+                                    height={1000}
+                                    alt="felix"
+                                    className="w-full"
+                                    priority
+                              />
                         </div>
                         <div>
                               <h2 className="inline-block font-bold uppercase font-mono text-lg lg:text-2xl bg-[var(--on-accent)] text-[var(--reversed-text)] tracking-wide">
@@ -46,19 +53,19 @@ export default async function App() {
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
                                     {
-                                          "I'm a Full-stack Engineer with a passion for building robust, scalable applications that solve real-world problems. For the past [Number] years, I've specialized in the Node.js ecosystem, moving beyond just writing code to designing architectures that stand the test of time."
+                                          "I'm a Full-stack Engineer with a passion for building robust, scalable applications that solve real-world problems. Though the past 4+ years, I've moved beyond just writing code to designing architectures that stand the test of time."
                                     }
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
                                     {
-                                          "My philosophy is simple: Code is for humans, not just machines. Whether I'm optimizing a PostgreSQL query, fine-tuning a Next.js frontend, or documenting my journey, I focus on clarity, performance, and maintainability."
+                                          " I focus on clarity, performance, and maintainability. I also like documenting my journey through my Daily Logs, where I share insights on Node.js architecture, DX, and building in public."
                                     }
                               </p>
                               <div className="mt-4">
                                     <p className="py-2 text-[var(--accent)]">{"When I'm not in the IDE:"}</p>
                                     <p className="pb-2 text-sm text-balance leading-6">
                                           {
-                                                "I'm likely diving into the latest tech stacks, sharing my journey through my Daily Logs, or listening to some classic reggae to clear my head. I believe that being a great engineer means being a lifelong student, and Ibring that curiosity to every project I touch."
+                                                "I'm likely delving more into AI Engineering. I believe that being a great engineer means being a lifelong student, and I bring that curiosity to every project I touch."
                                           }
                                     </p>
                               </div>
