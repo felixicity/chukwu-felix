@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
-import { Project } from "@/app/components/projectCard";
+import { Project } from "@/app/components/ProjectCard";
 import { useParams } from "next/navigation";
 import { projects } from "@/app/lib/projectData";
 

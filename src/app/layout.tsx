@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Header } from "./components/header";
+import { Header } from "./components/Header";
 import type { Metadata } from "next";
 import "./globals.css";
 

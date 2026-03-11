@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ProjectCard } from "../components/projectCard";
+import { ProjectCard } from "../components/ProjectCard";
 import { projects } from "../lib/projectData";
 
 const Page = () => {

@@ -3,7 +3,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types"; // The renderer
 import { Badge } from "../../components/Badge";
 import rehypePrettyCode from "rehype-pretty-code";
-import { CodeBlock } from "../../components/codeBlock";
+import { CodeBlock } from "../../components/CodeBlock";
 import AudioPlayer from "@/app/components/AudioPlayer";
 import Youtube from "@/app/components/Youtube";
 

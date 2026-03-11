@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Navigation } from "./navigation";
+import { Navigation } from "./Navigation";
 import { Menu } from "lucide-react";
-import { MobileNav } from "./mobileNav";
+import { MobileNav } from "./MobileNav";
 
 export const Header = () => {
       // 1. Initialize with a safe default for the server

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { NameSVG } from "../components/nameSvg";
-import { ProjectCarousel } from "../components/featured-work-carousel";
-import RecentArticles from "../components/recent-articles";
+import { NameSVG } from "../components/NameSvg";
+import { ProjectCarousel } from "../components/WorkCarousel";
+import RecentArticles from "../components/RecentArticles";
 import { ArrowRight } from "lucide-react";
 import { getAllPosts } from "../lib/mdx";
 
