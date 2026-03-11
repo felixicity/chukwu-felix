@@ -1,4 +1,4 @@
-import Homepage from "./(Home)/page";
+import Homepage from "./(home)/page";
 import "./globals.css";
 
 export default function App() {
