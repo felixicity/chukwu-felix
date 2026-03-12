@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { getPostBySlug } from "../../lib/mdx";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types"; // The renderer
@@ -71,13 +72,30 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       const post = await getPostBySlug(slug); // A helper function to find the file
 
       return (
-            <article className="max-w-3xl mx-auto py-20 px-6">
+            <article className="max-w-3xl mx-auto py-10 px-6">
                   <header className="mb-8">
                         <h1 className="text-4xl font-bold mb-4">{post.meta.title}</h1>
                         <div className="flex gap-2">
                               {post.meta.tags.map((tag) => (
                                     <Badge key={tag} text={tag} />
                               ))}
+                        </div>
+                        <div className="flex items-center gap-8">
+                              <div>
+                                    <Image
+                                          src="/image.png"
+                                          alt={post.meta.title}
+                                          width={100}
+                                          height={100}
+                                          className="rounded-full"
+                                    />
+                              </div>
+                              <div className="flex flex-col gap-2">
+                                    <h4 className="font-bold">{post.meta.author}</h4>
+                                    <div>
+                                          {post.meta.date} / {post.meta.readingTime}
+                                    </div>
+                              </div>
                         </div>
                   </header>
 

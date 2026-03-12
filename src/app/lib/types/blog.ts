@@ -2,6 +2,7 @@
 export interface PostMeta {
       title: string;
       date: string;
+      author: string;
       tags: string[];
       readingTime: string;
       description?: string; // Optional: for SEO
