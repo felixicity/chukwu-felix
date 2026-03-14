@@ -21,14 +21,14 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                   description: post.meta.description,
                   url: `https://chukwu-felix.vercel.app/blog/${post.slug}`,
                   siteName: "Chukwu Felix - Software Engineer",
-                  images: [
-                        {
-                              url: post.meta.image || "", // Tailored image per post
-                              width: 1200,
-                              height: 630,
-                              alt: post.meta.title,
-                        },
-                  ],
+                  //   images: [
+                  //         {
+                  //               url: post.meta.image || "", // Tailored image per post
+                  //               width: 1200,
+                  //               height: 630,
+                  //               alt: post.meta.title,
+                  //         },
+                  //   ],
                   locale: "en_US",
                   type: "article", // Crucial for blog posts
                   publishedTime: post.meta.date,
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                   card: "summary_large_image",
                   title: post.meta.title,
                   description: post.meta.description,
-                  images: [post.meta?.image || ""],
+                  //   images: [post.meta?.image || ""],
             },
       };
 }
@@ -81,19 +81,16 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
                               ))}
                         </div>
                         <div className="flex items-center gap-8">
-                              <div>
-                                    <Image
-                                          src="/image.png"
-                                          alt={post.meta.title}
-                                          width={100}
-                                          height={100}
-                                          className="rounded-full"
-                                    />
+                              <div className="relative w-12 h-12 aspect-auto">
+                                    <Image src="/image.png" alt={post.meta.title} fill className="rounded-[50%]" />
                               </div>
-                              <div className="flex flex-col gap-2">
+
+                              <div className="flex flex-col gap-2 my-8">
                                     <h4 className="font-bold">{post.meta.author}</h4>
-                                    <div>
-                                          {post.meta.date} / {post.meta.readingTime}
+                                    <div className="flex items-center gap-4 text-xs text-[var(--neutral)]">
+                                          <span>{post.meta.date}</span>
+                                          <span style={{ color: "#475569" }}>•</span>
+                                          <span>{post.meta.readingTime}</span>
                                     </div>
                               </div>
                         </div>

@@ -14,6 +14,8 @@ html {
       --accent: light-dark(#002549, #ffd000);
       --on-accent: light-dark(#18181b, #f0c400);
       --accent-surface: light-dark(#a1a1aa, #ffd000);
+      --neutral-dark: color-mix(in oklab, var(--color-white) 9%, transparent);
+      --neutral-bg: light-dark(var(--color-white), var(--neutral-dark));
       --neutral: light-dark(#71717a, #a1a1aa);
       --app-bar-height: 104px;
       --shadow-color: 220 3% 15%;

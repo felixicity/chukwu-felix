@@ -12,7 +12,7 @@ const RecentArticles = ({ posts }: { posts: Post[] }) => {
                               {/* The Hover Background */}
                               <motion.div
                                     layoutId="hoverBg"
-                                    className="absolute inset-0 bg-white/[0.03] opacity-0 group-hover:opacity-100 shadow-[var(--card-shadow)] rounded-xl -z-10"
+                                    className="absolute inset-0 bg-[var(--neutral-bg)]  opacity-0 group-hover:opacity-100 shadow-[var(--card-shadow)] rounded-xl -z-10"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                               />
                               <Link
@@ -35,7 +35,7 @@ const RecentArticles = ({ posts }: { posts: Post[] }) => {
                                           </p>
                                     </div>
 
-                                    <span className="absolute -top-3 -right-1 md:relative text-6xl text-[var(--accent-surface)]">
+                                    <span className="absolute italic font-bold -top-1 right-3 md:relative text-4xl text-[var(--accent-surface)]">
                                           {post.meta.issue && `#${post.meta.issue}`}
                                     </span>
 

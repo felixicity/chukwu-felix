@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getPostBySlug } from "@/app/lib/mdx";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 // Route segment config (essential for a senior setup)
 // Change 'edge' to 'nodejs'
@@ -16,7 +18,6 @@ export default async function OGImage({ params }: Props) {
       const { slug } = params;
 
       // 1. Fetch your blog post data (Next.js deduplicates this fetch)
-      // You might need to adjust this function call based on your project
       const post = await getPostBySlug(slug);
 
       if (!post) {
@@ -30,9 +31,25 @@ export default async function OGImage({ params }: Props) {
 
       // 2. Define your fonts (highly recommended for a branded look)
       // This step makes sure your custom font is embedded in the image.
-      const fontData = await fetch(
-            new URL("../../../../public/fonts/IntelOneMono-VariableFont_wght.ttf", import.meta.url),
-      ).then((res) => res.arrayBuffer());
+      //   const fontData = await fetch(
+      //         new URL("../../../../public/fonts/IntelOneMono-VariableFont_wght.ttf", import.meta.url),
+      //   ).then((res) => res.arrayBuffer());
+
+      const intelFontPath = join(process.cwd(), "public/fonts/IntelOneMono-Regular.ttf");
+      const intelFontData = await readFile(intelFontPath);
+
+      const groteskFontPath = join(process.cwd(), "public/fonts/SpaceGrotesk-Regular.ttf");
+      const groteskFontData = await readFile(groteskFontPath);
+
+      const blobImagePath = join(process.cwd(), "public/google_wiki_bg_blob.png");
+      let blobImageBase64 = "";
+      try {
+            const blobImageBuffer = await readFile(blobImagePath);
+            blobImageBase64 = `data:image/png;base64,${blobImageBuffer.toString("base64")}`;
+      } catch (error) {
+            console.error("Error loading background blob image:", error);
+            // The image will just have a solid background if the blob is missing.
+      }
 
       // 3. Return the ImageResponse with your branded JSX/CSS
       return new ImageResponse(
@@ -43,60 +60,100 @@ export default async function OGImage({ params }: Props) {
                         width: "100%",
                         display: "flex",
                         flexDirection: "column",
-                        alignItems: "flex-start",
+                        alignItems: "center",
                         justifyContent: "center",
-                        background: "linear-gradient(to bottom right, #1a202c, #2d3748)", // Your brand colors
-                        padding: "80px",
-                        fontFamily: '"Inter"', // Must match the font name defined below
+                        backgroundColor: "#0f172a", // Deep dark background
+                        fontFamily: "IntelOneMono",
+                        position: "relative",
+                        overflow: "hidden",
                   }}
             >
-                  {/* Top Section: Your Site Name / Logo */}
-                  <div
-                        style={{
-                              display: "flex",
-                              fontSize: 32,
-                              fontStyle: "normal",
-                              color: "#a0aec0", // Subdued text color
-                              marginBottom: "40px",
-                        }}
-                  >
-                        Chukwu Felix / Blog
-                  </div>
+                  {/* THE BLOB: Centered behind everything */}
+                  {blobImageBase64 && (
+                        <img
+                              src={blobImageBase64}
+                              alt="blob"
+                              style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    transform: "translate(-50%, -50%)",
+                                    width: "600px", // Adjust size as needed
+                                    height: "600px",
+                                    opacity: 0.3, // Keeps it subtle against the dark BG
+                                    zIndex: 1,
+                              }}
+                        />
+                  )}
 
-                  {/* Middle Section: The Dynamic Post Title */}
+                  {/* THE CONTENT: Stacked on top */}
                   <div
                         style={{
                               display: "flex",
-                              fontSize: 72,
-                              fontWeight: 800,
-                              color: "white",
-                              lineHeight: 1.1,
-                              marginBottom: "20px",
-                              textWrap: "balance", // Prevents single-word last lines (senior touch!)
+                              flexDirection: "column",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              zIndex: 10,
+                              padding: "0 80px",
+                              textAlign: "center",
                         }}
                   >
-                        {post.meta.title}
-                  </div>
+                        <p
+                              style={{
+                                    fontSize: 16,
+                                    color: "#94a3b8",
+                                    letterSpacing: "0.2em",
+                                    textTransform: "uppercase",
+                                    marginBottom: 20,
+                              }}
+                        >
+                              Felix&apos;s Engineering Blog
+                        </p>
 
-                  {/* Bottom Section: Author / Category / Date */}
-                  <div
-                        style={{
-                              display: "flex",
-                              fontSize: 28,
-                              color: "#cbd5e0",
-                        }}
-                  >
-                        By {post.meta.author} • {new Date(post.meta.date).toLocaleDateString()}
+                        <h1
+                              style={{
+                                    fontSize: 80,
+                                    color: "white",
+                                    lineHeight: 1.1,
+                                    fontWeight: 800,
+                                    margin: 0,
+                                    textWrap: "balance",
+                                    fontFamily: "spaceGrotesk",
+                              }}
+                        >
+                              {post?.meta.title || "Default Title"}
+                        </h1>
+
+                        <div
+                              style={{
+                                    marginTop: 40,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 15,
+                                    fontSize: 24,
+                                    color: "#cbd5e0",
+                              }}
+                        >
+                              <span>By {post?.meta.author}</span>
+
+                              {/* <span>{new Date(post?.meta.date).toLocaleDateString()}</span> */}
+                        </div>
                   </div>
             </div>,
             {
                   ...size,
                   fonts: [
                         {
-                              name: "Inter",
-                              data: fontData,
+                              name: "spaceGrotesk",
+                              data: groteskFontData,
+                              weight: 700,
                               style: "normal",
-                              weight: 800,
+                        },
+                        {
+                              name: "IntelOneMono",
+                              data: intelFontData,
+                              weight: 700,
+                              style: "normal",
                         },
                   ],
             },

@@ -27,10 +27,15 @@ export const MobileNav = ({ setMenu }: { setMenu: (value: boolean) => void }) =>
       ));
       return (
             <div
-                  className="absolute top-0 bottom-0 right-0 left-30 bg-[var(--surface)] z-1000 p-20
+                  className="min-w-full min-h-full absolute top-0 bottom-0 right-0 left-0 bg-transparent
                                md:hidden"
             >
-                  <ul className="flex flex-col gap-8 text-sm uppercase font-bold">{links}</ul>
+                  <div className="relative w-full h-full">
+                        <div className="w-full h-full" onClick={() => setMenu(false)}></div>
+                        <div className="absolute top-0 bottom-0 right-0 left-30 bg-[var(--surface)] z-1000 p-20">
+                              <ul className="flex flex-col gap-8 text-sm uppercase font-bold">{links}</ul>
+                        </div>
+                  </div>
             </div>
       );
 };

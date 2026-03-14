@@ -45,7 +45,7 @@ export default async function App() {
                               />
                         </div>
                         <div>
-                              <h2 className="inline-block font-bold uppercase font-mono text-lg lg:text-2xl bg-[var(--on-accent)] text-[var(--reversed-text)] tracking-wide">
+                              <h2 className="inline-block font-bold uppercase font-mono text-lg lg:text-2xl bg-[var(--on-accent)] text-[var(--reversed-text)] tracking-wide px-4 py-1">
                                     About me
                               </h2>
                               <p className="py-2 text-[var(--accent)]">
@@ -53,7 +53,7 @@ export default async function App() {
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
                                     {
-                                          "I'm a Full-stack Engineer with a passion for building robust, scalable applications that solve real-world problems. Though the past 4+ years, I've moved beyond just writing code to designing architectures that stand the test of time."
+                                          "I have passion for building robust, scalable applications that solve real-world problems. Through the past 4+ years, I've moved beyond just writing code to designing architectures that stand the test of time."
                                     }
                               </p>
                               <p className="pb-2 text-sm text-balance leading-6">
@@ -62,10 +62,10 @@ export default async function App() {
                                     }
                               </p>
                               <div className="mt-4">
-                                    <p className="py-2 text-[var(--accent)]">{"When I'm not in the IDE:"}</p>
+                                    <p className="py-2 text-[var(--accent)]">{"When I'm not Building:`"}</p>
                                     <p className="pb-2 text-sm text-balance leading-6">
                                           {
-                                                "I'm likely delving more into AI Engineering. I believe that being a great engineer means being a lifelong student, and I bring that curiosity to every project I touch."
+                                                "I play with code,listen to good music or read some books and articles on business, AI and self-development"
                                           }
                                     </p>
                               </div>
@@ -82,12 +82,13 @@ export default async function App() {
                               <div>
                                     <h2 className="text-3xl font-display font-bold tracking-tight">Recent Logs</h2>
                                     <p className="text-[var(--neutral)] mt-2">
-                                          Thoughts on architecture, DX, and building in public.
+                                          Thoughts on Software engineering, Developer Experience, and building in
+                                          public.
                                     </p>
                               </div>
                               <Link
                                     href="/blog"
-                                    className="group flex items-center gap-2 text-sm font-medium text-[var(--accent)]"
+                                    className="group flex items-center gap-2 text-xs md:text-sm font-medium text-[var(--accent)]"
                               >
                                     View Archive{" "}
                                     <ArrowRight
