@@ -62,7 +62,7 @@ export default function RootLayout({
             },
             {
                   title: "resume",
-                  url: "https://www.github.com/felixicity",
+                  url: "https://docs.google.com/document/d/1oaABPio2WDyxO-16E6TV818fYJMqJqDlISbWNsFx_dU/edit?usp=sharing",
             },
             {
                   title: "github",
