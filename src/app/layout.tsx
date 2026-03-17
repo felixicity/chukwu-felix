@@ -59,10 +59,11 @@ export default function RootLayout({
             {
                   title: "linkedin",
                   url: "https://www.linkedin.com/in/felix-chukwu-chukwuma",
+                  props: { target: "_blank", rel: "noopener noreferrer" },
             },
             {
                   title: "resume",
-                  url: "https://docs.google.com/document/d/1oaABPio2WDyxO-16E6TV818fYJMqJqDlISbWNsFx_dU/edit?usp=sharing",
+                  url: "/Felix_Chukwu_Software_Developer_Resume.pdf",
             },
             {
                   title: "github",
@@ -84,6 +85,7 @@ export default function RootLayout({
                                                             <Link
                                                                   href={link.url}
                                                                   className="underline uppercase transition-all hover:no-underline dark:hover:text-yellow-400"
+                                                                  {...link.props}
                                                             >
                                                                   {link.title}
                                                             </Link>
