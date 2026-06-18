@@ -72,7 +72,7 @@ const Blogpage = async () => {
                                     <div className="flex items-center gap-2 text-sm text-[var(--neutral)] italic">
                                           <span>Showing all posts</span>
                                           <span className="h-px flex-1 bg-white/5" />
-                                          <span>{posts.length} entries</span>
+                                          <span>{posts ? posts?.length : 0} entries</span>
                                     </div>
 
                                     <div className="flex flex-col gap-16">
@@ -104,7 +104,7 @@ const Blogpage = async () => {
                                                                   </span>
                                                             </div>
                                                             <div className="flex gap-4 mb-4">
-                                                                  {post.meta.tags.length > 0 &&
+                                                                  {post.meta.tags?.length > 0 &&
                                                                         post.meta.tags.map((tag) => (
                                                                               <span
                                                                                     key={tag}
