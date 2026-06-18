@@ -7,8 +7,6 @@ tags: [e-commerce, software-engineering]
 description: "Building the KaZafi admin dashboard taught me that order management is much more than displaying data. From status transitions to activity logs and audit trails, I learned how businesses maintain visibility and control over customer orders."
 ---
 
-# Building the KaZafi Admin Dashboard: Managing Orders Beyond CRUD
-
 ## Introduction
 
 When most developers think about an admin dashboard, they imagine tables, forms, and a collection of buttons for managing data.
@@ -25,8 +23,6 @@ At first, the requirements seemed straightforward:
 However, as development progressed, I realized that order management is essentially a workflow system. Every order moves through multiple stages, and every action taken by an administrator should be recorded.
 
 What initially looked like a simple dashboard gradually evolved into a much more sophisticated application.
-
----
 
 ## Orders Are More Than Database Records
 
@@ -56,15 +52,11 @@ enum OrderStatus {
 }
 ```
 
-````
-
 This simple enum became one of the most important pieces of the dashboard because it established a clear workflow for the business.
 
 ### Lesson Learned
 
 Orders should not be treated as static records. They represent ongoing business processes that move through defined stages.
-
----
 
 ## Not Every Status Change Should Be Allowed
 
@@ -94,8 +86,6 @@ By enforcing valid transitions, the application maintains data integrity and ref
 ### Lesson Learned
 
 Good software doesn't just store data—it enforces the rules that keep that data meaningful.
-
----
 
 ## Building the Order Details Page
 
@@ -128,8 +118,6 @@ The goal wasn't simply displaying data—it was providing context.
 ### Lesson Learned
 
 Dashboards should help users make decisions, not force them to search for information.
-
----
 
 ## Why I Added Activity Logs
 
@@ -164,8 +152,6 @@ This feature became increasingly valuable as the application grew because it cre
 
 Visibility is just as important as functionality. Teams need to understand what happened, not just what currently exists.
 
----
-
 ## The Value of Audit Trails
 
 One concept I encountered while building KaZafi was auditability.
@@ -186,8 +172,6 @@ This transparency improves operational efficiency and accountability.
 ### Lesson Learned
 
 Audit trails transform guesswork into evidence. They help teams answer questions quickly and confidently.
-
----
 
 ## Designing for Administrators
 
@@ -220,8 +204,6 @@ These features may seem minor individually, but together they dramatically impro
 
 The best admin tools reduce friction. Every click saved compounds over time.
 
----
-
 ## Thinking Beyond CRUD
 
 One of the biggest mindset shifts during this project was realizing that dashboards are not just CRUD applications.
@@ -242,8 +224,6 @@ These concerns pushed the project beyond basic database operations and into work
 
 Real-world software often revolves around processes and workflows, not just data storage.
 
----
-
 ## What the Dashboard Taught Me
 
 Before building KaZafi's admin dashboard, I viewed backend development primarily as creating APIs and storing data.
@@ -262,8 +242,6 @@ I learned about:
 
 Most importantly, I realized that software is not just about implementing features. It is about helping people perform real-world tasks efficiently, accurately, and confidently.
 
----
-
 ## Final Thoughts
 
 The customer-facing side of an e-commerce platform often gets the most attention, but the admin dashboard is where much of the business actually operates.
@@ -274,9 +252,6 @@ What began as a simple order table eventually became a system for monitoring, co
 
 That experience gave me a deeper appreciation for the role of software engineering in solving operational challenges—not just technical ones.
 
----
-
 ## Watch the Development Walkthrough
 
 <YouTube id="bwKBVXpI9w4" />
-````
