@@ -1,0 +1,228 @@
+---
+title: "Building KaZafi: What Implementing Payments Taught Me About Real-World Software Engineering"
+date: "2026-06-18"
+author: "Chukwu Felix"
+issue: "01"
+tags: [e-commerce, web-development, software-engineering]
+description: "While building KaZafi, I discovered that integrating payments involves much more than collecting card details. It requires understanding asynchronous systems, security concerns, and maintaining data consistency. This article shares some of the lessons I learned while implementing the payment workflow."
+---
+
+# Building KaZafi: What Implementing Payments Taught Me About Real-World Software Engineering
+
+## Introduction
+
+When people think about building an e-commerce application, they often imagine product listings, shopping carts, user accounts, and checkout pages.
+
+While developing **KaZafi**, I discovered that the payment system introduces an entirely different level of complexity. This was the point where the project stopped feeling like a tutorial and started feeling like a real-world software product.
+
+At first, my mental model of payments was simple:
+
+1. User adds products to cart.
+2. User clicks checkout.
+3. User pays.
+4. Order is completed.
+
+In reality, the workflow is significantly more complex.
+
+Payment systems involve external services, network failures, security concerns, asynchronous events, and data consistency challenges. Implementing these workflows taught me valuable software engineering lessons that extend far beyond e-commerce development.
+
+---
+
+## The First Challenge: Trusting External Systems
+
+One of the earliest lessons I learned was that a backend should never blindly trust information coming from the frontend.
+
+Imagine a customer is purchasing products worth **₦50,000**. If the frontend sends the amount directly to the payment provider, a malicious user could modify the value before the request is processed.
+
+Instead, the backend should calculate the total amount using trusted data stored in the database.
+
+```ts
+interface CartItem {
+      productId: string;
+      quantity: number;
+      price: number;
+}
+
+function calculateTotal(items: CartItem[]): number {
+      return items.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+```
+
+By recalculating totals on the server, the application maintains a single source of truth and prevents price manipulation.
+
+### Lesson Learned
+
+Never trust client-side calculations for critical business logic. The backend should always validate and compute sensitive values independently.
+
+---
+
+## Payments Are Asynchronous
+
+Before working on KaZafi, I assumed payment processing happened instantly.
+
+The reality is that payment providers communicate with applications through asynchronous events, commonly known as **webhooks**.
+
+A typical payment flow looks like this:
+
+1. User initiates payment.
+2. Payment provider processes the transaction.
+3. The provider sends a webhook notification.
+4. The backend verifies the transaction.
+5. The order status is updated.
+
+Because of this workflow, payment success should never depend solely on what the frontend reports.
+
+```ts
+enum OrderStatus {
+      PENDING = "pending",
+      PAID = "paid",
+      FAILED = "failed",
+}
+```
+
+When a customer starts checkout, an order can be created with a `PENDING` status.
+
+Only after successful verification should the order transition to `PAID`.
+
+### Lesson Learned
+
+Frontend success messages are not proof of payment. Always rely on verified backend events before updating business records.
+
+---
+
+## Transaction Verification Is Essential
+
+A common beginner mistake is assuming that a successful payment popup means the transaction has been completed successfully.
+
+In reality, every transaction should be verified directly with the payment provider before updating order records.
+
+```ts
+async function verifyPayment(reference: string): Promise<boolean> {
+      const payment = await paymentProvider.verify(reference);
+
+      return payment.status === "success";
+}
+```
+
+This additional verification layer protects against fraudulent transactions, failed payments, and synchronization issues.
+
+### Lesson Learned
+
+Verification should be treated as a mandatory step, not an optional safeguard.
+
+---
+
+## Managing Inventory Correctly
+
+Inventory management becomes surprisingly challenging once multiple customers interact with the system simultaneously.
+
+Imagine two users attempting to purchase the last available item at the same time.
+
+Without proper controls, both transactions might succeed, resulting in overselling.
+
+A simplified stock validation might look like this:
+
+```ts
+if (product.stock < requestedQuantity) {
+      throw new Error("Insufficient stock");
+}
+
+product.stock -= requestedQuantity;
+await product.save();
+```
+
+While production systems often require database transactions, locking mechanisms, or optimistic concurrency control, the principle remains the same: inventory and orders must remain consistent.
+
+### Lesson Learned
+
+Managing inventory is not just about subtraction. It is about maintaining consistency under concurrent access.
+
+---
+
+## Security Became More Important Than Features
+
+As KaZafi evolved, I began spending more time thinking about security than feature development.
+
+Some of the security measures I implemented and considered include:
+
+- Storing secrets in environment variables.
+- Using HTTP-only cookies for authentication.
+- Verifying incoming webhooks.
+- Validating request payloads.
+- Preventing unauthorized order updates.
+- Restricting access to sensitive operations.
+
+For example:
+
+```ts
+const token = process.env.PAYMENT_SECRET_KEY;
+```
+
+Hardcoding API keys or secrets directly into source code is a dangerous practice that can expose critical infrastructure.
+
+### Lesson Learned
+
+Security is not a feature that gets added later. It must be part of the development process from the beginning.
+
+---
+
+## Thinking Beyond Features
+
+The most valuable lesson from implementing payments was the shift in mindset it forced upon me.
+
+Before this project, I focused primarily on building functionality:
+
+- Creating pages
+- Writing APIs
+- Connecting databases
+- Displaying information
+
+During payment integration, I began thinking differently.
+
+Questions such as these became more important:
+
+- What happens if the payment provider is unavailable?
+- What if the webhook arrives twice?
+- What if a user refreshes the checkout page?
+- What if the transaction succeeds but the response fails?
+- How do I keep data consistent across services?
+
+These are the kinds of problems that separate demo applications from production systems.
+
+---
+
+## What KaZafi Taught Me
+
+Building KaZafi changed how I think about software engineering.
+
+The project taught me that successful applications are not simply collections of pages and endpoints. They are systems designed to remain reliable even when users behave unexpectedly, networks fail, or third-party services become unreliable.
+
+Implementing payments exposed me to several important engineering concepts:
+
+- Asynchronous workflows
+- External service integration
+- Transaction verification
+- Data consistency
+- Security best practices
+- Error handling and resilience
+
+These lessons apply far beyond e-commerce and are relevant to almost any production software system.
+
+---
+
+## Final Thoughts
+
+Payment systems turned out to be one of the most educational parts of building KaZafi.
+
+What initially seemed like a simple "Pay Now" button became an opportunity to learn about distributed systems, reliability, security, and software architecture.
+
+More importantly, it taught me to think like an engineer rather than simply a programmer.
+
+As I continue developing KaZafi, these lessons will remain valuable—not only for e-commerce applications but for building reliable software systems in general.
+
+---
+
+## Watch the Development Walkthrough
+
+<YouTube id="bwKBVXpI9w4" />
+```
