@@ -6,10 +6,11 @@ import { SerializeOptions } from "node_modules/next-mdx-remote/dist/types"; // T
 import { Badge } from "../../components/Badge";
 import rehypePrettyCode from "rehype-pretty-code";
 import { CodeBlock } from "../../components/CodeBlock";
-import AudioPlayer from "@/app/components/AudioPlayer";
-import Youtube from "@/app/components/Youtube";
+import { AudioPlayer } from "@/app/components/AudioPlayer";
+import { YouTube } from "@/app/components/Youtube";
 import { CardGroup } from "@/app/components/CardGroup";
 import { Card } from "@/app/components/Card";
+import { Frame } from "@/app/components/Frame";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
       const { slug } = await params;
@@ -39,9 +40,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 const mdxComponents = {
       AudioPlayer,
-      Youtube,
+      YouTube,
       Card,
       CardGroup,
+      Frame,
       pre: (props: { children: React.ReactNode; [key: string]: unknown }) => <CodeBlock {...props} />,
 };
 

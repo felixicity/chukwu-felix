@@ -1,4 +1,4 @@
-const YouTube = ({ id }: { id: string }) => {
+export const YouTube = ({ id }: { id: string }) => {
       return (
             <div className="my-8 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
                   <div className="relative aspect-video">
@@ -13,5 +13,3 @@ const YouTube = ({ id }: { id: string }) => {
             </div>
       );
 };
-
-export default YouTube;
