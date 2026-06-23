@@ -1,15 +1,18 @@
 import Link from "next/link";
 import { ReactNode } from "react";
+import * as Icons from "lucide-react";
 import { LucideIcon } from "lucide-react";
 
 interface CardProps {
       title: string;
-      icon?: LucideIcon;
+      icon?: string;
       href: string;
       children: ReactNode;
 }
 
-export function Card({ title, icon: Icon, href, children }: CardProps) {
+export function Card({ title, icon, href, children }: CardProps) {
+      const Icon = icon ? (Icons[icon as keyof typeof Icons] as LucideIcon) : null;
+
       return (
             <Link
                   href={href}
