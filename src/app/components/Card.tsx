@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { ReactNode } from "react";
 import * as Icons from "lucide-react";
-import { LucideIcon } from "lucide-react";
-import * as Icons from "lucide-react";
 import { LucideProps } from "lucide-react";
 import { ComponentType } from "react";
 interface CardProps {
