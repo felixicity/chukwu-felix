@@ -20,6 +20,7 @@ function resolveIcon(name?: string): IconType | null {
             .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
             .join("");
 
+      // IMPORTANT: no full-module casting
       const Icon = (Icons as any)[pascal] as IconType | undefined;
 
       return Icon ?? null;
