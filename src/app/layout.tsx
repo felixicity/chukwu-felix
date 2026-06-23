@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import Link from "next/link";
 import { Header } from "./components/Header";
 import type { Metadata } from "next";
-import "./globals.css";
+import "./global.css";
 
 // app/layout.tsx
 export const metadata: Metadata = {
