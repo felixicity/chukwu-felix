@@ -8,6 +8,8 @@ import rehypePrettyCode from "rehype-pretty-code";
 import { CodeBlock } from "../../components/CodeBlock";
 import AudioPlayer from "@/app/components/AudioPlayer";
 import Youtube from "@/app/components/Youtube";
+import { CardGroup } from "@/app/components/CardGroup";
+import { Card } from "@/app/components/Card";
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
       const { slug } = await params;
@@ -21,14 +23,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                   description: post.meta.description,
                   url: `https://chukwu-felix.vercel.app/blog/${post.slug}`,
                   siteName: "Chukwu Felix - Software Engineer",
-                  //   images: [
-                  //         {
-                  //               url: post.meta.image || "", // Tailored image per post
-                  //               width: 1200,
-                  //               height: 630,
-                  //               alt: post.meta.title,
-                  //         },
-                  //   ],
                   locale: "en_US",
                   type: "article", // Crucial for blog posts
                   publishedTime: post.meta.date,
@@ -46,6 +40,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 const mdxComponents = {
       AudioPlayer,
       Youtube,
+      Card,
+      CardGroup,
       pre: (props: { children: React.ReactNode; [key: string]: unknown }) => <CodeBlock {...props} />,
 };
 
